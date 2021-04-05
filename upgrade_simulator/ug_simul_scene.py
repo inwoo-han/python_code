@@ -13,6 +13,8 @@ def resource_path(relative_path):                   # exe파일로 가공하기 
     return os.path.join(base_path, relative_path)
 
 pygame.init()
+icon = pygame.image.load(resource_path("images/LOSTARK.jpg"))
+pygame.display.set_icon(icon)
 
 # RGB 값을 전역변수로 만든 후 포맷
 BLACK = (  0,   0,   0)
@@ -142,7 +144,7 @@ while not done:
                         print("강화시작 누름")
                         nor_scene()
                         ug_result, ug_lv, per_wei_success, fail_cnt, jangin = us.upgrade_start()
-                        print(ug_result, ug_lv, per_wei_success, fail_cnt)
+                        print(ug_result, ug_lv, per_wei_success / 10, fail_cnt)
                         printText("강화 단계 : " + str(ug_lv), 300, 100, WHITE)
                         printText("성공 확률 : " + str(per_wei_success / 10) + '%', 674, 100, WHITE)
                         if jangin >= 1000:
@@ -172,7 +174,7 @@ while not done:
                         cus_scene()
                         ug_result, ug_lv, per_wei_success, fail_cnt, jangin = us.upgrade_start()
                         printText(str(cus_lv), 512, 525, WHITE)
-                        print(ug_result, ug_lv, per_wei_success, fail_cnt)
+                        print(ug_result, ug_lv, per_wei_success / 10, fail_cnt)
                         printText("강화 단계 : " + str(ug_lv), 300, 100, WHITE)
                         printText("성공 확률 : " + str(per_wei_success / 10) + '%', 674, 100, WHITE)
                         if jangin >= 1000:

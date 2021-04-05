@@ -52,6 +52,7 @@ class upgrade_Simul:
 
     def nor_mode(self):
         print('일반모드 시작')
+        self.reset_var()
         self.ug_lv = 1
         self.per_wei_success = self.per_success[self.ug_lv - 1]
         #self.upgrade_start()
@@ -59,8 +60,9 @@ class upgrade_Simul:
 
     def cus_mode(self, ug_lv):
         print('커스텀모드 시작')
-        self.jangin = 0.0
-        self.fail_cnt = 0
+        # self.jangin = 0.0
+        # self.fail_cnt = 0
+        self.reset_var()
         self.ug_lv = ug_lv
         self.per_wei_success = self.per_success[self.ug_lv - 1]
         return self.ug_lv, self.per_wei_success
