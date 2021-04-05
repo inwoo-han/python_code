@@ -13,7 +13,7 @@ def resource_path(relative_path):                   # exe파일로 가공하기 
     return os.path.join(base_path, relative_path)
 
 pygame.init()
-icon = pygame.image.load(resource_path("images/LOSTARK.jpg"))
+icon = pygame.image.load(resource_path("images/lostark_icon.ico"))
 pygame.display.set_icon(icon)
 
 # RGB 값을 전역변수로 만든 후 포맷
