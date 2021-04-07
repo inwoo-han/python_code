@@ -5,10 +5,10 @@ import ug_simul
 def resource_path(relative_path):                   # exe파일로 가공하기 위해 파일 환경변수 설정
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
-        base_path = sys._MEIPASS
+        base_path = sys._MEIPASS                    # 임시로 제공되는 폴더의 경로
     except Exception:
         # sys._MEIPASS is not defined, so use the original path
-        base_path = os.path.abspath(".")
+        base_path = os.path.abspath(".")            # 현재 경로를 절대경로로 바꿔서 반환, 도트 표시는 현재 디렉토리에서 절대경로
 
     return os.path.join(base_path, relative_path)
 
