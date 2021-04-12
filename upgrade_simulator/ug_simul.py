@@ -8,8 +8,6 @@ class upgrade_Simul:
     ug_chk = 0                      # 강화 시작 여부
     per_success = [1000, 1000, 1000, 1000, 1000, 600, 450, 300,
                    300, 300, 150, 150, 150, 100, 100, 100, 50, 50, 30, 30, 10, 10, 5, 5] # 단계별 강화 확률
-    #per_success = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
-    #               1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
     per_wei_success = 0.0           # 강화 누적성공 확률
     try_cnt = 0                     # 강화 시도 횟수
     fail_cnt = 0                    # 강화 실패 횟수
@@ -20,20 +18,6 @@ class upgrade_Simul:
     ug_lv = 0                       # 강화 수치
     ug_result = ''                  # 강화 결과
     randNum = 0                     # 랜덤 뽑기(확률)
-
-    #randNum = random.randrange(1,1000) 랜덤뽑기로 확률 산출
-
-    '''def menu_chk(self):
-        print('메뉴를 선택해주세요.')
-        print('-1 종료, 1 일반모드, 2 커스텀모드')
-        self.input_menu = int(input('입력 : '))
-        if self.input_menu == -1:
-            quit()
-        elif self.input_menu == 1:
-            self.nor_mode()
-        elif self.input_menu == 2:
-            self.cus_mode()
-        return self.input_menu'''
 
     def reset_var(self):
         self.input_menu = 0  # 메뉴 선택
@@ -52,7 +36,7 @@ class upgrade_Simul:
 
     def nor_mode(self):
         print('일반모드 시작')
-        self.reset_var()
+        self.reset_var()                # 일반 모드 시작시 이전에 사용된 강화 값이 유지되는 현상을 방지하기 위해 값을 초기화
         self.ug_lv = 1
         self.per_wei_success = self.per_success[self.ug_lv - 1]
         #self.upgrade_start()
@@ -60,9 +44,7 @@ class upgrade_Simul:
 
     def cus_mode(self, ug_lv):
         print('커스텀모드 시작')
-        # self.jangin = 0.0
-        # self.fail_cnt = 0
-        self.reset_var()
+        self.reset_var()                # 커스텀 모드 시작시 이전에 사용된 강화 값이 유지되는 현상을 방지하기 위해 값을 초기화
         self.ug_lv = ug_lv
         self.per_wei_success = self.per_success[self.ug_lv - 1]
         return self.ug_lv, self.per_wei_success
@@ -93,6 +75,7 @@ class upgrade_Simul:
                 # print('성공확률 : ', self.per_wei_success * 0.1, '%')
 
             elif self.per_wei_success < self.randNum:                       # 강화 실패시 수행
+                # 강화 실패시 성공 확률 증가 부분으로 최대 10회까지만 적용
                 if self.fail_cnt < 10:
                     self.fail_cnt += 1
                     self.per_wei_success = self.per_success[self.ug_lv-1] + (self.per_success[self.ug_lv-1] * (self.fail_cnt * 0.1))
@@ -109,14 +92,8 @@ class upgrade_Simul:
                 print('-' * 30)
 
             print(self.ug_result, self.ug_lv)
-            return self.ug_result, self.ug_lv, self.per_wei_success, self.fail_cnt, self.jangin  # 파이게임에서 보여줄 강화 결과와 강화 단계
+            return self.ug_result, self.ug_lv, self.per_wei_success, self.fail_cnt, self.jangin  # 파이게임에서 강화 결과를 보여주기 위해 값을 리턴
         except IndexError as e:                         # 강화 최대치 달성 시 리스트 범위를 벗어나게 되어 IndexError 에러 발생을 이용해 강화 최대치임을 알려준다.
             print("강화 최대치 입니다! 축하합니다!", e)
         except Exception as e:
             print("오류발생 :", e)
-
-
-
-#ug = upgrade_Simul()
-#ug.upgrade_start()
-#ug.menu_chk()
